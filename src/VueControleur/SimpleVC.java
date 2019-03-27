@@ -46,17 +46,21 @@ public class SimpleVC extends Application {
             for (int j = 0; j < SIZE_Y; j++) { 
                 ImageView img = new ImageView(); 
                 tab[i][j] = img; 
-                grid.add(img, i, j); 
+                root.add(img, i, j); 
                 //Mur du haut et du bas
                 if ((i>0 && i<20 )&& (j==0 || j==20)){
                     tab[i][j].setImage(imMur); 
+                    spm.setTab(i,j,1);
                 //Mur des côtés
                 }else if((j>0 && j<20 && j!=7 && j!=9 && j!=11 )&& (i==19 || i==1)){
                     tab[i][j].setImage(imMur); 
+                    spm.setTab(i,j,1);
                 } else if((i>=0 && i!=5 && i!=7 && i!=13 && i!=15)&& (j==8 || j ==10)){
                     tab[i][j].setImage(imMur);
+                    spm.setTab(i,j,1);
                 }else { 
-                    tab[i][j].setImage(imSol); 
+                    tab[i][j].setImage(imSol);
+                    spm.setTab(i,j,0);
                 }
             } 
  
@@ -67,15 +71,13 @@ public class SimpleVC extends Application {
             for (int i = 0; i < SIZE_X; i++) { // rafraichissement graphique 
                 for (int j = 0; j < SIZE_Y; j++) {
                     if (spm.getX() == i && spm.getY() == j) { // spm est à la position i, j => le dessiner 
-                        }
+                        
                         tab[i][j].setImage(imPM);
-                        tab[oldx][oldy].setImage(imSol);
+                        if(oldx!=spm.getX() || oldy!=spm.getY())
+                            tab[oldx][oldy].setImage(imSol);
                     }
-                    
-                    
-                    
                 } 
-            } 
+            }
         }; 
          
         spm.addObserver(o); 
