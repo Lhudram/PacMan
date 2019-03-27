@@ -5,6 +5,9 @@
  */
 package Modele;
 
+import javafx.scene.input.KeyCode;
+
+import javax.swing.*;
 import java.util.Observable;
 
 
@@ -66,8 +69,19 @@ public class SimplePacMan extends Observable implements Runnable {
         exit = true;
     }
 
-    public void setxy(int addx, int addy){
+    public void deplacement(KeyCode direction){
+        int addx=0,addy=0;
 
+        switch(direction){
+            case UP:addx=0;addy=-1;
+                break;
+            case DOWN:addx=0;addy=1;
+                break;
+            case LEFT:addx=-1;addy=0;
+                break;
+            case RIGHT:addx=1;addy=0;
+                break;
+        }
         if(x+addx>=0 && x+addx<sizeX && y+addy >=0 && y+addy<sizeY) {
             if (!estMur(x+addx, y+addy)) {
                 x+=addx;
@@ -96,14 +110,14 @@ public class SimplePacMan extends Observable implements Runnable {
 
     public boolean estMur(int newx, int newy){
         if(newx!=x) {
-            if (grille[newx][y]!=1) {
-               return false;
+            if (grille[newx][y]==1 || grille[newx][y]==4 ) {
+               return true;
             }
         }
         if(newy!=y) {
-            return grille[x][newy] == 1;
+            return grille[x][newy] == 1 || grille[x][newy] == 4;
         }
-        return true;
+        return false;
     }
 
     public void initXY() {

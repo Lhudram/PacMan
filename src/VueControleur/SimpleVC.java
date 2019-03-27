@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.application.Application; 
 import javafx.scene.Scene; 
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -25,8 +26,9 @@ public class SimpleVC extends Application {
     private final int SIZE_Y = 21;
     private int oldx = 0;
     private int oldy =0;
-    
-     
+    private KeyCode direction=KeyCode.N;
+
+
     @Override 
     public void start(Stage primaryStage) {
         SimplePacMan spm = new SimplePacMan(SIZE_X, SIZE_Y); // initialisation du modèle
@@ -89,15 +91,16 @@ public class SimpleVC extends Application {
                             spm.setTab(spm.getX(),spm.getY(),0);
                         }
                     }
-                } 
+                }
             }
+            oldx = spm.getX();
+            oldy = spm.getY();
+
+            spm.deplacement(direction);
         }; 
          
         spm.addObserver(o); 
         spm.start(); // on démarre spm 
-
-        /*StackPane root = new StackPane();
-        root.getChildren().add(grid); */
 
         Scene scene = new Scene(root, 500, 500);
          
@@ -107,26 +110,11 @@ public class SimpleVC extends Application {
  
         // on écoute le clavier 
         root.setOnKeyPressed(event -> {
-            //oldx et oldy utilisé pour changer dernière position en sol
-            oldx = spm.getX();
-            oldy = spm.getY();
-            
-            switch(event.getCode()){ 
-                case UP:spm.setxy(0,-1);
-                    break; 
-                case DOWN:spm.setxy(0,1);
-                    break; 
-                case LEFT:spm.setxy(-1,0);
-                    break; 
-                case RIGHT:spm.setxy(1,0);
-                    break; 
-            } 
-            
+            direction=event.getCode();
         }); 
          
         root.requestFocus();
         primaryStage.setOnCloseRequest((WindowEvent event1) -> {
-
             spm.stop();
         });
          
