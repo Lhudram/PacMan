@@ -21,8 +21,10 @@ import javafx.stage.WindowEvent;
  */ 
 public class SimpleVC extends Application { 
      
-    private final int SIZE_X =21;
-    private final int SIZE_Y =21;
+    private final int SIZE_X =21; 
+    private final int SIZE_Y = 21;
+    private int oldx = 0;
+    private int oldy =0;
      
     @Override 
     public void start(Stage primaryStage) {
@@ -42,13 +44,22 @@ public class SimpleVC extends Application {
 
         for (int i = 0; i < SIZE_X; i++) { // initialisation de la grille (sans image) 
             for (int j = 0; j < SIZE_Y; j++) { 
-                ImageView img = new ImageView();
-
-                tab[i][j]=img;
-
-                root.add(img, i, j);
-            }
-
+                ImageView img = new ImageView(); 
+                tab[i][j] = img; 
+                grid.add(img, i, j); 
+                //Mur du haut et du bas
+                if ((i>0 && i<20 )&& (j==0 || j==20)){
+                    tab[i][j].setImage(imMur); 
+                //Mur des côtés
+                }else if((j>0 && j<20 && j!=7 && j!=9 && j!=11 )&& (i==19 || i==1)){
+                    tab[i][j].setImage(imMur); 
+                } else if((i>=0 && i!=5 && i!=7 && i!=13 && i!=15)&& (j==8 || j ==10)){
+                    tab[i][j].setImage(imMur);
+                }else { 
+                    tab[i][j].setImage(imSol); 
+                }
+            } 
+ 
         } 
 
         // l'observer observe l'obervable (update est exécuté dès notifyObservers() est appelé côté modèle )
@@ -56,19 +67,13 @@ public class SimpleVC extends Application {
             for (int i = 0; i < SIZE_X; i++) { // rafraichissement graphique 
                 for (int j = 0; j < SIZE_Y; j++) {
                     if (spm.getX() == i && spm.getY() == j) { // spm est à la position i, j => le dessiner 
+                        }
                         tab[i][j].setImage(imPM);
+                        tab[oldx][oldy].setImage(imSol);
                     }
-                    else {
-                        if(i==1 && j ==1){
-                            tab[i][j].setImage(imMur);
-                            spm.setTab(i,j,1);
-                        }
-                        else {
-                            tab[i][j].setImage(imSol);
-                            spm.setTab(i,j,0);
-                        }
-                    }
-
+                    
+                    
+                    
                 } 
             } 
         }; 
@@ -81,16 +86,16 @@ public class SimpleVC extends Application {
 
         Scene scene = new Scene(root, 500, 500);
          
-        primaryStage.setTitle("Hello World!"); 
+        primaryStage.setTitle("PacMan"); 
         primaryStage.setScene(scene); 
         primaryStage.show(); 
  
         // on écoute le clavier 
-        root.setOnKeyPressed(event -> { 
- 
-            if (event.isShiftDown()) { 
-                spm.initXY(); // si on clique sur shift, on remet spm en haut à gauche 
-            } 
+        root.setOnKeyPressed(event -> {
+            //oldx et oldy utilisé pour changer dernière position en sol
+            oldx = spm.getX();
+            oldy = spm.getY();
+            
             switch(event.getCode()){ 
                 case UP:spm.setxy(0,-1);
                     break; 
