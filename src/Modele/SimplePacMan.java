@@ -17,17 +17,18 @@ import java.util.logging.Logger;
  */
 public class SimplePacMan extends Observable implements Runnable {
 
+    private volatile boolean exit = false;
     private int x, y, sizeX, sizeY;
-    
+    private int tab[][];//0=sol,1=mur
     private Random r = new Random();
-    
-    
+
     public SimplePacMan(int _sizeX, int _sizeY) {
-        x = 0; y = 0;
-        
+
+        x = 10; y = 15;
+
         sizeX = _sizeX;
         sizeY = _sizeY;
-       
+        tab = new int[sizeX][sizeY];
     }
     
     public int getX() {
@@ -41,17 +42,29 @@ public class SimplePacMan extends Observable implements Runnable {
     public void start() {
         new Thread(this).start();
     }
+    public void stop(){
+        exit = true;
+    }
 
-    public void setxy(int newx,int newy){
+    public void setxy(int newx, int newy){
         if(coupPossible(newx,newy)) {
             x += newx;
             y += newy;
         }
     }
 
-    public boolean coupPossible(int newx,int newy){
-        if (x + newx >= 0 && x + newx < sizeX && y + newy >= 0 && y + newy < sizeY)
-            return true;
+    public boolean coupPossible(int newx, int newy){
+        if(x + newx >= 0 && x + newx < sizeX && y + newy >= 0 && y + newy < sizeY){
+            if(newx!=0) {
+                if (tab[x + newx][y]==0) {
+                    return true;
+                }
+            }
+            if(newy!=0) {
+                return tab[x][y + newy] == 0;
+            }
+
+        }
         return false;
     }
 
@@ -62,11 +75,9 @@ public class SimplePacMan extends Observable implements Runnable {
     
     @Override
     public void run() {
-        while(true) { // spm descent dans la grille à chaque pas de temps
+        while(!exit) { // spm descent dans la grille à chaque pas de temps
             
            /*int deltaX = r.nextInt(2);
-
-
 
            if (x + deltaX > 0 && x + deltaX < sizeX) {
                x += deltaX;
@@ -78,7 +89,6 @@ public class SimplePacMan extends Observable implements Runnable {
            } 
 
            */
-           System.out.println(x + " - " + y);
            
            setChanged(); 
            notifyObservers(); // notification de l'observer
@@ -86,11 +96,13 @@ public class SimplePacMan extends Observable implements Runnable {
             try {
                 Thread.sleep(300); // pause
             } catch (InterruptedException ex) {
-                Logger.getLogger(SimplePacMan.class.getName()).log(Level.SEVERE, null, ex);
+                Thread.currentThread().interrupt();
+                return;
             }
         }
-    
     }
-    
-    
+
+    public void setTab(int i, int j ,int elem) {
+        this.tab[i][j] = elem;
+    }
 }
