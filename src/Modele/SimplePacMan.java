@@ -6,10 +6,6 @@
 package Modele;
 
 import java.util.Observable;
-import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.stage.Stage;
 
 
 /**
@@ -20,16 +16,34 @@ public class SimplePacMan extends Observable implements Runnable {
 
     private volatile boolean exit = false;
     private int x, y, sizeX, sizeY;
-    private int tab[][];//0=sol,1=mur
-    private Random r = new Random();
+    private int[][] grille;//0=sol,1=mur,2=fruits,3=gommes
 
     public SimplePacMan(int _sizeX, int _sizeY) {
-
         x = 10; y = 15;
-
         sizeX = _sizeX;
         sizeY = _sizeY;
-        tab = new int[sizeX][sizeY];
+
+        grille = new int[][]{
+                {0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0},
+                {0,1,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,1,0},
+                {0,1,3,1,1,2,1,1,1,2,1,2,1,1,1,2,1,1,3,1,0},
+                {0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,1,0},
+                {0,1,2,1,1,2,1,2,1,1,1,1,1,2,1,2,1,1,2,1,0},
+                {0,1,2,2,2,2,1,2,2,2,1,2,2,2,1,2,2,2,2,1,0},
+                {0,1,1,1,1,2,1,1,1,0,1,0,1,1,1,2,1,1,1,1,0},
+                {0,0,0,0,1,2,1,0,0,0,0,0,0,0,1,2,1,0,0,0,0},
+                {1,1,1,1,1,2,1,0,1,1,1,1,1,0,1,2,1,1,1,1,1},
+                {0,0,0,0,0,2,0,0,1,0,0,0,1,0,0,1,2,0,0,0,0},
+                {1,1,1,1,1,2,1,0,1,1,1,1,1,0,1,2,1,1,1,1,1},
+                {0,0,0,0,1,2,1,0,0,0,0,0,0,0,1,2,1,0,0,0,0},
+                {0,1,1,1,1,2,1,1,1,0,1,0,1,1,1,2,1,1,1,1,0},
+                {0,1,2,2,2,2,1,2,2,2,1,2,2,2,1,2,2,2,2,1,0},
+                {0,1,2,1,1,2,1,2,1,1,1,1,1,2,1,2,1,1,2,1,0},
+                {0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,1,0},
+                {0,1,3,1,1,2,1,1,1,2,1,2,1,1,1,2,1,1,3,1,0},
+                {0,1,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,1,0},
+                {0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0},
+        };
     }
     
     public int getX() {
@@ -47,26 +61,44 @@ public class SimplePacMan extends Observable implements Runnable {
         exit = true;
     }
 
-    public void setxy(int newx, int newy){
-        if(coupPossible(newx,newy)) {
-            x += newx;
-            y += newy;
+    public void setxy(int addx, int addy){
+
+        if(x+addx>=0 && x+addx<sizeX && y+addy >=0 && y+addy<sizeY) {
+            if (!estMur(x+addx, y+addy)) {
+                x+=addx;
+                y+=addy;
+            }
+        }
+        else {
+            if (x + addx < 0) {
+                if (!estMur(20, y))
+                    x =20;
+            }
+            if (x + addx >= sizeX) {
+                if (!estMur(0, y))
+                    x =0;
+            }
+            if (y + addy >= sizeY) {
+                if (!estMur(x, 0))
+                    y=0;
+            }
+            if (y + addy < 0) {
+                if (!estMur(x, 20))
+                    y=20;
+            }
         }
     }
 
-    public boolean coupPossible(int newx, int newy){
-        if(x + newx >= 0 && x + newx < sizeX && y + newy >= 0 && y + newy < sizeY){
-            if(newx!=0) {
-                if (tab[x + newx][y]==0) {
-                    return true;
-                }
+    public boolean estMur(int newx, int newy){
+        if(newx!=x) {
+            if (grille[newx][y]==0) {
+               return false;
             }
-            if(newy!=0) {
-                return tab[x][y + newy] == 0;
-            }
-
         }
-        return false;
+        if(newy!=y) {
+            return grille[x][newy] != 0;
+        }
+        return true;
     }
 
     public void initXY() {
@@ -104,6 +136,6 @@ public class SimplePacMan extends Observable implements Runnable {
     }
 
     public void setTab(int i, int j ,int elem) {
-        this.tab[i][j] = elem;
+        this.grille[i][j] = elem;
     }
 }
