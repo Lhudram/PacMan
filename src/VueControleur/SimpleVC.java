@@ -36,6 +36,8 @@ public class SimpleVC extends Application {
         Image imPM = new Image("Pacman.png"); // préparation des images
         Image imSol = new Image("sol.png");
         Image imMur = new Image("mur.png");
+        Image imPetiteGomme = new Image("mini_gomme.png");
+        Image imGomme = new Image("gomme.png");
 
         //img.setScaleY(0.01); 
         //img.setScaleX(0.01); 
@@ -47,21 +49,22 @@ public class SimpleVC extends Application {
                 ImageView img = new ImageView(); 
                 tab[i][j] = img; 
                 root.add(img, i, j); 
-                //Mur du haut et du bas
-                if ((i>0 && i<20 )&& (j==0 || j==20)){
-                    tab[i][j].setImage(imMur); 
-                    spm.setTab(i,j,1);
-                //Mur des côtés
-                }else if((j>0 && j<20 && j!=7 && j!=9 && j!=11 )&& (i==19 || i==1)){
-                    tab[i][j].setImage(imMur); 
-                    spm.setTab(i,j,1);
-                } else if((i>=0 && i!=5 && i!=7 && i!=13 && i!=15)&& (j==8 || j ==10)){
-                    tab[i][j].setImage(imMur);
-                    spm.setTab(i,j,1);
-                }else { 
-                    tab[i][j].setImage(imSol);
-                    spm.setTab(i,j,0);
+                
+                switch (spm.getTab(i,j)){
+                    case 0 :
+                        tab[i][j].setImage(imSol);
+                        break;
+                    case 1:
+                        tab[i][j].setImage(imMur);
+                        break;
+                    case 2:
+                        tab[i][j].setImage(imPetiteGomme);
+                        break;
+                    case 3:
+                        tab[i][j].setImage(imGomme);
+                        break;
                 }
+                    
             } 
  
         } 

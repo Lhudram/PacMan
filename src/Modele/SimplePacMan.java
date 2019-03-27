@@ -45,6 +45,8 @@ public class SimplePacMan extends Observable implements Runnable {
                 {0,1,2,1,1,1,1,1,1,2,1,2,1,1,1,1,1,1,2,1,0},
                 {0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,0},
                 {0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0},
+                {0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0},
+                {0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0},
         };
     }
     
@@ -139,5 +141,9 @@ public class SimplePacMan extends Observable implements Runnable {
 
     public void setTab(int i, int j ,int elem) {
         this.grille[i][j] = elem;
+    }
+    
+    public int getTab(int i, int j) {
+        return this.grille[j][i];
     }
 }
