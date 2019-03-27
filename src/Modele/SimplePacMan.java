@@ -17,9 +17,12 @@ public class SimplePacMan extends Observable implements Runnable {
     private volatile boolean exit = false;
     private int x, y, sizeX, sizeY;
     private int[][] grille;//0=sol,1=mur,2=fruits,3=gommes,4=porte fantome
+    private int score;
 
     public SimplePacMan(int _sizeX, int _sizeY) {
-        x = 10; y = 15;
+        x = 10; 
+        y = 15;
+        score=0;
         sizeX = _sizeX;
         sizeY = _sizeY;
 
@@ -143,5 +146,17 @@ public class SimplePacMan extends Observable implements Runnable {
     
     public int getTab(int i, int j) {
         return this.grille[i][j];
+    }
+    
+    public void augmenterScore(){
+        this.score++;
+    }
+
+    public int getScore() {
+        return this.score;
+    }
+    
+    public void setInvincible(){
+        
     }
 }

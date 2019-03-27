@@ -25,6 +25,7 @@ public class SimpleVC extends Application {
     private final int SIZE_Y = 21;
     private int oldx = 0;
     private int oldy =0;
+    
      
     @Override 
     public void start(Stage primaryStage) {
@@ -73,11 +74,20 @@ public class SimpleVC extends Application {
         Observer o = (o1, arg) -> { 
             for (int i = 0; i < SIZE_X; i++) { // rafraichissement graphique 
                 for (int j = 0; j < SIZE_Y; j++) {
+                    
                     if (spm.getX() == i && spm.getY() == j) { // spm est à la position i, j => le dessiner 
                         
                         tab[i][j].setImage(imPM);
                         if(oldx!=spm.getX() || oldy!=spm.getY())
                             tab[oldx][oldy].setImage(imSol);
+                        if(spm.getTab(spm.getX(),spm.getY())==2){
+                            spm.augmenterScore();
+                            
+                            spm.setTab(spm.getX(),spm.getY(),0);
+                        } else if(spm.getTab(spm.getX(),spm.getY())==3){
+                            spm.setInvincible();
+                            spm.setTab(spm.getX(),spm.getY(),0);
+                        }
                     }
                 } 
             }
@@ -111,6 +121,7 @@ public class SimpleVC extends Application {
                 case RIGHT:spm.setxy(1,0);
                     break; 
             } 
+            
         }); 
          
         root.requestFocus();
