@@ -16,7 +16,7 @@ public class SimplePacMan extends Observable implements Runnable {
 
     private volatile boolean exit = false;
     private int x, y, sizeX, sizeY;
-    private int[][] grille;//0=sol,1=mur,2=fruits,3=gommes
+    private int[][] grille;//0=sol,1=mur,2=fruits,3=gommes,4=porte fantome
 
     public SimplePacMan(int _sizeX, int _sizeY) {
         x = 10; y = 15;
@@ -32,7 +32,7 @@ public class SimplePacMan extends Observable implements Runnable {
                 {0,1,2,2,2,2,1,2,2,2,1,2,2,2,1,2,2,2,2,1,0},
                 {0,1,1,1,1,2,1,1,1,0,1,0,1,1,1,2,1,1,1,1,0},
                 {0,0,0,0,1,2,1,0,0,0,0,0,0,0,1,2,1,0,0,0,0},
-                {1,1,1,1,1,2,1,0,1,1,1,1,1,0,1,2,1,1,1,1,1},
+                {1,1,1,1,1,2,1,0,1,1,4,1,1,0,1,2,1,1,1,1,1},
                 {0,0,0,0,0,2,0,0,1,0,0,0,1,0,0,1,2,0,0,0,0},
                 {1,1,1,1,1,2,1,0,1,1,1,1,1,0,1,2,1,1,1,1,1},
                 {0,0,0,0,1,2,1,0,0,0,0,0,0,0,1,2,1,0,0,0,0},
