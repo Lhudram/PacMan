@@ -6,12 +6,13 @@
 package VueControleur;
 
 import Modele.SimplePacMan;
+import java.util.Observable;
 import java.util.Observer;
 import javafx.scene.image.Image;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -22,8 +23,8 @@ import javafx.stage.Stage;
  */
 public class SimpleVC extends Application {
     
-    private final int SIZE_X =10;
-    private final int SIZE_Y = 10;
+    public final int SIZE_X =10;
+    public final int SIZE_Y = 10;
     
     @Override
     public void start(Stage primaryStage) {
@@ -35,8 +36,10 @@ public class SimpleVC extends Application {
         
         // Pacman.svg.png
         Image imPM = new Image("Pacman.png"); // préparation des images
-        Image imVide = new Image("Vide.png");
-
+        Image imVide = new Image("vide.png");
+        Image imMur = new Image("sol.png");
+        
+        
         //img.setScaleY(0.01);
         //img.setScaleX(0.01);
         
@@ -45,30 +48,38 @@ public class SimpleVC extends Application {
         for (int i = 0; i < SIZE_X; i++) { // initialisation de la grille (sans image)
             for (int j = 0; j < SIZE_Y; j++) {
                 ImageView img = new ImageView();
-
+                
                 tab[i][j] = img;
-
+                
                 grid.add(img, i, j);
             }
-
+            
         }
-
-        // l'observer observe l'obervable (update est exécuté dès notifyObservers() est appelé côté modèle )
-        Observer o = (o1, arg) -> {
-            for (int i = 0; i < SIZE_X; i++) { // rafraichissement graphique
-                for (int j = 0; j < SIZE_Y; j++) {
-
-                    if (spm.getX() == i && spm.getY() == j) { // spm est à la position i, j => le dessiner
-                        tab[i][j].setImage(imPM);
-
-                    } else {
-
-                        tab[i][j].setImage(imVide);
+        
+        Observer o =  new Observer() { // l'observer observe l'obervable (update est exécuté dès notifyObservers() est appelé côté modèle )
+            @Override
+            public void update(Observable o, Object arg) {
+                for (int i = 0; i < SIZE_X; i++) { // rafraichissement graphique
+                    for (int j = 0; j < SIZE_Y; j++) {
+                        if (i == j) { // spm est à la position i, j => le dessiner
+                            tab[i][j].setImage(imMur);
+                            
+                        }else if (spm.getX() == i && spm.getY() == j) { // spm est à la position i, j => le dessiner
+                            tab[i][j].setImage(imPM);
+                            
+                        } else {
+                            
+                            tab[i][j].setImage(imVide);
+                        }
+                        
                     }
-
-                }
+                }    
             }
         };
+        
+        
+        
+        
         
         spm.addObserver(o);
         spm.start(); // on démarre spm
@@ -81,22 +92,15 @@ public class SimpleVC extends Application {
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.show();
+        
+        root.setOnKeyPressed(new EventHandler<javafx.scene.input.KeyEvent>() { // on écoute le clavier
+            
 
-        // on écoute le clavier
-        root.setOnKeyPressed(event -> {
-
-            if (event.isShiftDown()) {
-                spm.initXY(); // si on clique sur shift, on remet spm en haut à gauche
-            }
-            switch(event.getCode()){
-                case UP:spm.setxy(0,-1);
-                    break;
-                case DOWN:spm.setxy(0,1);
-                    break;
-                case LEFT:spm.setxy(-1,0);
-                    break;
-                case RIGHT:spm.setxy(1,0);
-                    break;
+            @Override
+            public void handle(javafx.scene.input.KeyEvent event) {
+                if (event.isShiftDown()) {
+                    spm.initXY(); // si on clique sur shift, on remet spm en haut à gauche
+                }
             }
         });
         
