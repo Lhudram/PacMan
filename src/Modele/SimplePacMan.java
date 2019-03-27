@@ -93,12 +93,12 @@ public class SimplePacMan extends Observable implements Runnable {
 
     public boolean estMur(int newx, int newy){
         if(newx!=x) {
-            if (grille[newx][y]==0) {
+            if (grille[newx][y]!=1) {
                return false;
             }
         }
         if(newy!=y) {
-            return grille[x][newy] != 0;
+            return grille[x][newy] == 1;
         }
         return true;
     }
