@@ -5,10 +5,13 @@
  */
 package Modele;
 
+import VueControleur.SimpleVC;
 import javafx.scene.input.KeyCode;
 
 import java.util.Observable;
 import java.util.Random;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 
 
 /**
@@ -277,5 +280,6 @@ public class SimplePacMan extends Observable implements Runnable {
     public int[] getFantomey() {
         return fantomey;
     }
+    
 
 }

@@ -11,10 +11,13 @@ import java.util.Observer;
 
 import javafx.scene.image.Image;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -28,14 +31,20 @@ public class SimpleVC extends Application {
     private int oldx = 0;
     private int oldy = 0;
     private KeyCode direction = KeyCode.N;
-
-
+    
     @Override
     public void start(Stage primaryStage) {
         SimplePacMan spm = new SimplePacMan(SIZE_X, SIZE_Y); // initialisation du modèle
-
-        GridPane root = new GridPane(); // création de la grille
-
+        
+        GridPane grid = new GridPane(); // création de la grille
+        GridPane score = new GridPane(); // création de la grille
+        
+        Label labelScore = new Label("Score : ");
+        labelScore.setStyle("-fx-text-fill: white");
+        score.setPadding(new Insets(5, 10, 5, 10));
+        score.setVgap(15);
+        score.setStyle("-fx-background-color: #000");
+        score.add(labelScore, 0, 0);
         // Pacman.svg.png 
         Image imPM = new Image("Pacman.png"); // préparation des images
         Image imSol = new Image("sol.png");
@@ -57,7 +66,7 @@ public class SimpleVC extends Application {
             for (int j = 0; j < SIZE_Y; j++) {
                 ImageView img = new ImageView();
                 tab[i][j] = img;
-                root.add(img, i, j);
+                grid.add(img, i, j);
 
                 switch (spm.getTab(i, j)) {
                     case 0:
@@ -156,18 +165,20 @@ public class SimpleVC extends Application {
         spm.addObserver(o);
         spm.start(); // on démarre spm 
 
-        Scene scene = new Scene(root, 500, 500);
+        VBox root = new VBox();
+        root.getChildren().addAll(score,grid);
+        Scene scene = new Scene(root, 21*18, 21*19+25);
 
         primaryStage.setTitle("PacMan");
         primaryStage.setScene(scene);
         primaryStage.show();
 
         // on écoute le clavier 
-        root.setOnKeyPressed(event -> {
+        grid.setOnKeyPressed(event -> {
             direction = event.getCode();
         });
 
-        root.requestFocus();
+        grid.requestFocus();
         primaryStage.setOnCloseRequest((WindowEvent event1) -> {
             spm.stop();
         });
