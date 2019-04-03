@@ -41,6 +41,10 @@ public class SimpleVC extends Application {
         Image imMur = new Image("mur.png");
         Image imPetiteGomme = new Image("mini_gomme.png");
         Image imGomme = new Image("gomme.png");
+        Image imGhost0 = new Image("fantome_bleu.png");
+        Image imGhost1 = new Image("fantome_rouge.png");
+        Image imGhost2 = new Image("fantome_orange.png");
+        Image imGhost3 = new Image("fantome_vert.png");
 
         //img.setScaleY(0.01); 
         //img.setScaleX(0.01); 
@@ -73,32 +77,49 @@ public class SimpleVC extends Application {
         } 
 
         // l'observer observe l'obervable (update est exécuté dès notifyObservers() est appelé côté modèle )
-        Observer o = (o1, arg) -> { 
+        Observer o = (o1, arg) -> {
+            int[] fantomex = spm.getFantomex();
+            int[] fantomey= spm.getFantomey();
             for (int i = 0; i < SIZE_X; i++) { // rafraichissement graphique 
                 for (int j = 0; j < SIZE_Y; j++) {
-                    
-                    if (spm.getX() == i && spm.getY() == j) { // spm est à la position i, j => le dessiner 
-                        
-                        tab[i][j].setImage(imPM);
-                        if(oldx!=spm.getX() || oldy!=spm.getY())
-                            tab[oldx][oldy].setImage(imSol);
-                        //On mange une gomme normal
-                        if(spm.getTab(spm.getX(),spm.getY())==2){
-                            spm.augmenterScore(0);
-                            spm.setTab(spm.getX(),spm.getY(),0);
-                        //On mange une super gomme
-                        } else if(spm.getTab(spm.getX(),spm.getY())==3){
-                            spm.augmenterScore(1);
-                            spm.setInvincible();
-                            spm.setTab(spm.getX(),spm.getY(),0);
+                    for(int k=0;k<spm.nbrfantome;k++){
+                        if(fantomex[k]==i && fantomey[k]==j){
+                            switch (k){
+                                case 0: tab[i][j].setImage(imGhost0);
+                                    break;
+                                case 1: tab[i][j].setImage(imGhost1);
+                                    break;
+                                case 2: tab[i][j].setImage(imGhost2);
+                                    break;
+                                case 3: tab[i][j].setImage(imGhost3);
+                                    break;
+                            }
+
                         }
+                    }
+                    if (spm.getX() == i && spm.getY() == j) { // spm est à la position i, j => le dessiner
+                        tab[i][j].setImage(imPM);
                     }
                 }
             }
+
+            if(oldx!=spm.getX() || oldy!=spm.getY())
+                tab[oldx][oldy].setImage(imSol);
+            if(spm.getTab(spm.getX(),spm.getY())==2){
+                spm.augmenterScore(0);
+                spm.setTab(spm.getX(),spm.getY(),0);
+            } else if(spm.getTab(spm.getX(),spm.getY())==3){
+                spm.augmenterScore(1);
+                spm.setInvincible();
+                spm.setTab(spm.getX(),spm.getY(),0);
+            }
+
             oldx = spm.getX();
             oldy = spm.getY();
 
+            spm.collisionFantome();
             spm.deplacement(direction);
+            spm.deplacementfantome();
         }; 
          
         spm.addObserver(o); 

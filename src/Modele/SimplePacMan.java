@@ -17,9 +17,14 @@ import java.util.Observable;
  */
 public class SimplePacMan extends Observable implements Runnable {
 
+    public int nbrfantome;
     private volatile boolean exit = false;
     private int x, y, sizeX, sizeY;
     private int[][] grille;//0=sol,1=mur,2=fruits,3=gommes,4=porte fantome
+    private int score;
+    private boolean estInvincible;
+    private int[] fantomex;
+    private int[] fantomey;
     private int score_dot;
     private int score_f;
 
@@ -31,7 +36,14 @@ public class SimplePacMan extends Observable implements Runnable {
         sizeX = _sizeX;
         sizeY = _sizeY;
 
-        grille = new int[][]{
+        this.nbrfantome=4;
+        this.fantomex=new int []{10,10,9,11};
+        this.fantomey=new int []{7,9,9,9};
+
+        this.score=0;
+        this.estInvincible=false;
+
+        this.grille = new int[][]{
                 {0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0},
                 {1,1,1,1,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1},
                 {1,2,3,2,2,2,1,0,1,0,1,0,1,2,2,3,1,2,2,2,1},
@@ -55,20 +67,26 @@ public class SimplePacMan extends Observable implements Runnable {
                 {0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0}
         };
     }
-    
-    public int getX() {
-        return x;
+    @Override
+    public void run() {
+        while(!exit) {
+            setChanged();
+            notifyObservers(); // notification de l'observer
+
+            try {
+                Thread.sleep(300); // pause
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+                return;
+            }
+        }
     }
-    
-    public int getY() {
-        return y;
-    }
-    
+
     public void start() {
         new Thread(this).start();
     }
     public void stop(){
-        exit = true;
+        this.exit = true;
     }
 
     public void deplacement(KeyCode direction){
@@ -110,7 +128,10 @@ public class SimplePacMan extends Observable implements Runnable {
         }
     }
 
-    public boolean estMur(int newx, int newy){
+    public void deplacementfantome() {
+    }
+
+    private boolean estMur(int newx, int newy){
         if(newx!=x) {
             if (grille[newx][y]==1 || grille[newx][y]==4 ) {
                return true;
@@ -126,34 +147,27 @@ public class SimplePacMan extends Observable implements Runnable {
         x = 0;
         y = 0;
     }
-    
-    @Override
-    public void run() {
-        while(!exit) { // spm descent dans la grille à chaque pas de temps
-            
-           /*int deltaX = r.nextInt(2);
 
-           if (x + deltaX > 0 && x + deltaX < sizeX) {
-               x += deltaX;
-           }
-           
-           int deltaY = r.nextInt(2);
-           if (y + deltaY > 0 && y + deltaY < sizeY) {
-               y += deltaY;
-           } 
-
-           */
-           
-           setChanged(); 
-           notifyObservers(); // notification de l'observer
-           
-            try {
-                Thread.sleep(300); // pause
-            } catch (InterruptedException ex) {
-                Thread.currentThread().interrupt();
-                return;
+    public void collisionFantome() {
+        for(int i=0;i<nbrfantome;i++){
+            if(fantomex[i]==x && fantomey[i]==y){
+                if(estInvincible()){
+                    augmenterScore(2);
+                }
+                else{
+                    gameOver();
+                }
             }
         }
+
+    }
+
+    private void gameOver() {
+        this.exit = true;
+    }
+
+    private boolean estInvincible() {
+        return this.estInvincible;
     }
 
     public void setTab(int i, int j ,int elem) {
@@ -187,6 +201,28 @@ public class SimplePacMan extends Observable implements Runnable {
     }
     
     public void setInvincible(){
-        
+        this.estInvincible = true;
+        this.timerInvincible=
     }
+
+    public void setNonInvicible(){
+        this.estInvincible=false;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int[] getFantomex() {
+        return fantomex;
+    }
+
+    public int[] getFantomey() {
+        return fantomey;
+    }
+
 }
