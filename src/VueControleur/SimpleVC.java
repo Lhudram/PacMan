@@ -82,11 +82,13 @@ public class SimpleVC extends Application {
                         tab[i][j].setImage(imPM);
                         if(oldx!=spm.getX() || oldy!=spm.getY())
                             tab[oldx][oldy].setImage(imSol);
+                        //On mange une gomme normal
                         if(spm.getTab(spm.getX(),spm.getY())==2){
-                            spm.augmenterScore();
-                            
+                            spm.augmenterScore(0);
                             spm.setTab(spm.getX(),spm.getY(),0);
+                        //On mange une super gomme
                         } else if(spm.getTab(spm.getX(),spm.getY())==3){
+                            spm.augmenterScore(1);
                             spm.setInvincible();
                             spm.setTab(spm.getX(),spm.getY(),0);
                         }

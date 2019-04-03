@@ -20,12 +20,14 @@ public class SimplePacMan extends Observable implements Runnable {
     private volatile boolean exit = false;
     private int x, y, sizeX, sizeY;
     private int[][] grille;//0=sol,1=mur,2=fruits,3=gommes,4=porte fantome
-    private int score;
+    private int score_dot;
+    private int score_f;
 
     public SimplePacMan(int _sizeX, int _sizeY) {
         x = 10; 
         y = 15;
-        score=0;
+        score_dot=0;
+        score_f=0;
         sizeX = _sizeX;
         sizeY = _sizeY;
 
@@ -162,12 +164,26 @@ public class SimplePacMan extends Observable implements Runnable {
         return this.grille[i][j];
     }
     
-    public void augmenterScore(){
-        this.score++;
+    public void augmenterScore(int point){
+        //point pac-dot
+        if (point==0)
+            this.score_dot+=10;
+        //power pellet
+        else if(point==1)
+            this.score_dot+=50;
+        //1er fantôme
+        else if(point==2)
+            this.score_f+=200;
+        else
+            this.score_f=this.score_f*2;
     }
 
-    public int getScore() {
-        return this.score;
+    public int getScoreDot() {
+        return this.score_dot;
+    }
+    
+    public int getScoreF() {
+        return this.score_f;
     }
     
     public void setInvincible(){
