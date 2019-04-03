@@ -6,12 +6,12 @@
       <change beforePath="$PROJECT_DIR$/out/production/TestPacMan/Modele/SimplePacMan$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TestPacMan/Modele/SimplePacMan$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TestPacMan/Modele/SimplePacMan.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TestPacMan/Modele/SimplePacMan.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TestPacMan/VueControleur/SimpleVC.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TestPacMan/VueControleur/SimpleVC.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TestPacMan/fantome_bleu.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TestPacMan/fantome_bleu.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TestPacMan/fantome_orange.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TestPacMan/fantome_orange.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TestPacMan/fantome_rouge.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TestPacMan/fantome_rouge.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TestPacMan/fantome_vert.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TestPacMan/fantome_vert.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modele/SimplePacMan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/SimplePacMan.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VueControleur/SimpleVC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VueControleur/SimpleVC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fantome_orange.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/fantome_orange.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fantome_rouge.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/fantome_rouge.png" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -68,46 +68,48 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/VueControleur/SimpleVC.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="111" column="36" selection-start-line="111" selection-start-column="36" selection-end-line="111" selection-end-column="36" />
+            <state relative-caret-position="211">
+              <caret line="94" column="43" selection-start-line="94" selection-start-column="43" selection-end-line="94" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5182#5183#0" expanded="true" />
+                <element signature="e#6500#6501#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Modele/SimplePacMan.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
-              <caret line="165" column="25" selection-start-line="165" selection-start-column="25" selection-end-line="165" selection-end-column="25" />
+            <state relative-caret-position="468">
+              <caret line="162" column="30" lean-forward="true" selection-start-line="162" selection-start-column="30" selection-end-line="162" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2860#2861#0" expanded="true" />
                 <element signature="e#2900#2901#0" expanded="true" />
-                <element signature="e#2866#2867#0" expanded="true" />
-                <element signature="e#2898#2899#0" expanded="true" />
-                <element signature="e#4685#4686#0" expanded="true" />
-                <element signature="e#4717#4718#0" expanded="true" />
-                <element signature="e#4620#4621#0" expanded="true" />
-                <element signature="e#4661#4662#0" expanded="true" />
-                <element signature="e#4887#4888#0" expanded="true" />
-                <element signature="e#4970#4971#0" expanded="true" />
-                <element signature="e#5385#5386#0" expanded="true" />
-                <element signature="e#5454#5455#0" expanded="true" />
-                <element signature="e#5132#5133#0" expanded="true" />
-                <element signature="e#5173#5174#0" expanded="true" />
-                <element signature="e#5209#5210#0" expanded="true" />
-                <element signature="e#5249#5250#0" expanded="true" />
-                <element signature="e#5658#5659#0" expanded="true" />
-                <element signature="e#5707#5708#0" expanded="true" />
-                <element signature="e#5772#5773#0" expanded="true" />
-                <element signature="e#5837#5838#0" expanded="true" />
+                <element signature="e#3454#3455#0" expanded="true" />
+                <element signature="e#3022#3023#0" expanded="true" />
+                <element signature="e#3054#3055#0" expanded="true" />
+                <element signature="e#6048#6049#0" expanded="true" />
+                <element signature="e#7402#7403#0" expanded="true" />
+                <element signature="e#7443#7444#0" expanded="true" />
+                <element signature="e#8061#8062#0" expanded="true" />
+                <element signature="e#8101#8102#0" expanded="true" />
+                <element signature="e#8140#8141#0" expanded="true" />
+                <element signature="e#8180#8181#0" expanded="true" />
+                <element signature="e#8209#8210#0" expanded="true" />
+                <element signature="e#8242#8243#0" expanded="true" />
+                <element signature="e#8267#8268#0" expanded="true" />
+                <element signature="e#8291#8292#0" expanded="true" />
+                <element signature="e#8316#8317#0" expanded="true" />
+                <element signature="e#8340#8341#0" expanded="true" />
+                <element signature="e#8374#8375#0" expanded="true" />
+                <element signature="e#8405#8406#0" expanded="true" />
+                <element signature="e#8439#8440#0" expanded="true" />
+                <element signature="e#8470#8471#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -133,8 +135,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/VueControleur/SimpleVC.java" />
         <option value="$PROJECT_DIR$/src/Modele/SimplePacMan.java" />
+        <option value="$PROJECT_DIR$/src/VueControleur/SimpleVC.java" />
       </list>
     </option>
   </component>
@@ -144,7 +146,9 @@
     <option name="width" value="974" />
     <option name="height" value="1047" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectReloadState">
     <option name="STATE" value="0" />
   </component>
@@ -195,7 +199,7 @@
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553708513851" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554301082473" />
     <property name="dynamic.classpath" value="false" />
     <property name="recentsLimit" value="5" />
   </component>
@@ -297,12 +301,12 @@
       <workItem from="1553707395816" duration="1114000" />
       <workItem from="1553724920185" duration="399000" />
       <workItem from="1553725362103" duration="539000" />
-      <workItem from="1554292925483" duration="2395000" />
+      <workItem from="1554292925483" duration="8007000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17702000" />
+    <option name="totallyTimeSpent" value="23314000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -369,43 +373,61 @@
     <entry file="file://$PROJECT_DIR$/src/fantome_orange.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/VueControleur/SimpleVC.java">
+    <entry file="file://$PROJECT_DIR$/src/gomme.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fantome_vulnerable.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="jar://G:/Java/src.zip!/java/util/Observable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="111" column="36" selection-start-line="111" selection-start-column="36" selection-end-line="111" selection-end-column="36" />
+        <state relative-caret-position="-726">
+          <caret line="114" selection-start-line="114" selection-end-line="114" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5182#5183#0" expanded="true" />
+            <element signature="e#3784#3785#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Modele/SimplePacMan.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="165" column="25" selection-start-line="165" selection-start-column="25" selection-end-line="165" selection-end-column="25" />
+        <state relative-caret-position="468">
+          <caret line="162" column="30" lean-forward="true" selection-start-line="162" selection-start-column="30" selection-end-line="162" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2860#2861#0" expanded="true" />
             <element signature="e#2900#2901#0" expanded="true" />
-            <element signature="e#2866#2867#0" expanded="true" />
-            <element signature="e#2898#2899#0" expanded="true" />
-            <element signature="e#4685#4686#0" expanded="true" />
-            <element signature="e#4717#4718#0" expanded="true" />
-            <element signature="e#4620#4621#0" expanded="true" />
-            <element signature="e#4661#4662#0" expanded="true" />
-            <element signature="e#4887#4888#0" expanded="true" />
-            <element signature="e#4970#4971#0" expanded="true" />
-            <element signature="e#5385#5386#0" expanded="true" />
-            <element signature="e#5454#5455#0" expanded="true" />
-            <element signature="e#5132#5133#0" expanded="true" />
-            <element signature="e#5173#5174#0" expanded="true" />
-            <element signature="e#5209#5210#0" expanded="true" />
-            <element signature="e#5249#5250#0" expanded="true" />
-            <element signature="e#5658#5659#0" expanded="true" />
-            <element signature="e#5707#5708#0" expanded="true" />
-            <element signature="e#5772#5773#0" expanded="true" />
-            <element signature="e#5837#5838#0" expanded="true" />
+            <element signature="e#3454#3455#0" expanded="true" />
+            <element signature="e#3022#3023#0" expanded="true" />
+            <element signature="e#3054#3055#0" expanded="true" />
+            <element signature="e#6048#6049#0" expanded="true" />
+            <element signature="e#7402#7403#0" expanded="true" />
+            <element signature="e#7443#7444#0" expanded="true" />
+            <element signature="e#8061#8062#0" expanded="true" />
+            <element signature="e#8101#8102#0" expanded="true" />
+            <element signature="e#8140#8141#0" expanded="true" />
+            <element signature="e#8180#8181#0" expanded="true" />
+            <element signature="e#8209#8210#0" expanded="true" />
+            <element signature="e#8242#8243#0" expanded="true" />
+            <element signature="e#8267#8268#0" expanded="true" />
+            <element signature="e#8291#8292#0" expanded="true" />
+            <element signature="e#8316#8317#0" expanded="true" />
+            <element signature="e#8340#8341#0" expanded="true" />
+            <element signature="e#8374#8375#0" expanded="true" />
+            <element signature="e#8405#8406#0" expanded="true" />
+            <element signature="e#8439#8440#0" expanded="true" />
+            <element signature="e#8470#8471#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/VueControleur/SimpleVC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="94" column="43" selection-start-line="94" selection-start-column="43" selection-end-line="94" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6500#6501#0" expanded="true" />
           </folding>
         </state>
       </provider>
