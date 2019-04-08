@@ -10,6 +10,6 @@
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
     <jar href="SimplePacMan.jar" size="15203" download="eager" />
   </resources>
-  <jfx:javafx-desc  width="800" height="600" main-class="VueControleur.SimpleVC"  name="SimplePacMan" />
+  <jfx:javafx-desc width="800" height="600" main-class="VueControleur.SimpleVC" name="SimplePacMan" />
   <update check="always"/>
 </jnlp>

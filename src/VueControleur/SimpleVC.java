@@ -5,29 +5,36 @@
  */
 package VueControleur;
 
-import Modele.SimplePacMan;
-
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Observer;
 
+import Modele.Direction;
+import Modele.Fantome;
+import Modele.Jeu;
+import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.geometry.Pos;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.Image;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 
 public class SimpleVC extends Application {
 
-    private final int SIZE_X = 21;
-    private final int SIZE_Y = 21;
     private int oldx = 0;
     private int oldy = 0;
-
     private int[] oldfantomex = new int[]{0, 0, 0, 0};
     private int[] oldfantomey = new int[]{0, 0, 0, 0};
 
@@ -35,41 +42,78 @@ public class SimpleVC extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        SimplePacMan spm = new SimplePacMan(SIZE_X, SIZE_Y); // initialisation du modèle
+
+        // initialisation du jeu
+        Jeu jeu = new Jeu();
+        int SIZE_X = jeu.getGrille().getSizeX();
+        int SIZE_Y = jeu.getGrille().getSizeY();
+
+        //initialisation affichage
+        VBox root = new VBox();
 
         GridPane grid = new GridPane(); // création de la grille
-        GridPane score = new GridPane(); // création de la grille
 
+        //lancement du son
+        URL resource = getClass().getResource("/pac-man.mp3");
+        MediaPlayer mp = new MediaPlayer(new Media(resource.toString()));
+        mp.setOnEndOfMedia(() -> mp.seek(Duration.ZERO));
+        mp.setVolume(0.1);
+        mp.play();
+
+        GridPane score = new GridPane();
+        //affichage du score
         Label labelScore = new Label("Score : ");
         labelScore.setStyle("-fx-text-fill: white");
         score.setPadding(new Insets(5, 10, 5, 10));
-        score.setVgap(15);
         score.setStyle("-fx-background-color: #000");
         score.add(labelScore, 0, 0);
-        // Pacman.svg.png 
-        Image imPM = new Image("Pacman.png"); // préparation des images
+        //affichage séparateur
+        Label labelSeparateur = new Label();
+        labelSeparateur.setStyle("-fx-text-fill: white");
+        labelSeparateur.setAlignment(Pos.CENTER);
+        score.add(labelSeparateur, 1, 0);
+        //affichage invinsible/game over
+        Label labelInfo = new Label();
+        labelInfo.setStyle("-fx-text-fill: white");
+        labelInfo.setContentDisplay(ContentDisplay.RIGHT);
+        score.add(labelInfo, 2, 0);
+        //contraintes des colonnes
+        ColumnConstraints col1 = new ColumnConstraints();
+        col1.setPercentWidth(25);
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setPercentWidth(50);
+        ColumnConstraints col3 = new ColumnConstraints();
+        col3.setPercentWidth(25);
+        score.getColumnConstraints().addAll(col1, col2, col3);
+
+        // préparation des images
         Image imSol = new Image("sol.png");
         Image imMur = new Image("mur.png");
         Image imPetiteGomme = new Image("mini_gomme.png");
         Image imGomme = new Image("gomme.png");
+        // image de PacMan
+        Image imPM = new Image("Pacman.png");
+        //ajout des fantomes
         Image imGhost0 = new Image("fantome_bleu.png");
+        jeu.ajouterFantome(10, 11, imGhost0);
         Image imGhost1 = new Image("fantome_rouge.png");
+        jeu.ajouterFantome(10, 9, imGhost1);
         Image imGhost2 = new Image("fantome_orange.png");
+        jeu.ajouterFantome(10, 9, imGhost2);
         Image imGhost3 = new Image("fantome_vert.png");
-        Image imGhostAfraid = new Image("fantome_vulnerable.png");
+        jeu.ajouterFantome(10, 9, imGhost3);
 
-        //img.setScaleY(0.01); 
-        //img.setScaleX(0.01); 
+        Image imGhostAfraid = new Image("fantome_vulnerable.png");
 
         ImageView[][] tab = new ImageView[SIZE_X][SIZE_Y]; // tableau permettant de récupérer les cases graphiques lors du rafraichissement
 
-        for (int i = 0; i < SIZE_X; i++) { // initialisation de la grille (sans image) 
+        for (int i = 0; i < SIZE_X; i++) { // initialisation de la grille
             for (int j = 0; j < SIZE_Y; j++) {
                 ImageView img = new ImageView();
                 tab[i][j] = img;
                 grid.add(img, i, j);
 
-                switch (spm.getTab(i, j)) {
+                switch (jeu.getGrille().getElement(i, j)) {
                     case 0:
                         tab[i][j].setImage(imSol);
                         break;
@@ -88,46 +132,36 @@ public class SimpleVC extends Application {
 
         }
 
+        //Affichage de tout les elements
+        root.getChildren().addAll(score, grid);
+        Scene scene = new Scene(root, 21 * 18, 21 * 19 + 25);
+        primaryStage.setTitle("PacMan");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
         // l'observer observe l'obervable (update est exécuté dès notifyObservers() est appelé côté modèle )
         Observer o = (o1, arg) -> {
-            int[] fantomex = spm.getFantomesx();
-            int[] fantomey = spm.getFantomesy();
-
-            if (spm.estInvincible()) {
-                spm.decrementerTimer();
-            }
+            ArrayList<Fantome> fantomes = jeu.getTabFantome();
 
             // on dessine pacman
-            tab[spm.getX()][spm.getY()].setImage(imPM);
-            spm.collisionFantome();
+            int positionXPacMan = jeu.getPacMan().getX();
+            int positionYPacMan = jeu.getPacMan().getY();
 
-            //on s'occupe des fantomes
-            for (int k = 0; k < spm.nbrfantome; k++) {
-                //on les redesinnes où ils doivent etre
-                if (spm.estInvincible()) {
-                    tab[fantomex[k]][fantomey[k]].setImage(imGhostAfraid);
-                } else {
-                    switch (k) {
-                        case 0:
-                            tab[fantomex[k]][fantomey[k]].setImage(imGhost0);
-                            break;
-                        case 1:
-                            tab[fantomex[k]][fantomey[k]].setImage(imGhost1);
-                            break;
-                        case 2:
-                            tab[fantomex[k]][fantomey[k]].setImage(imGhost2);
-                            break;
-                        case 3:
-                            tab[fantomex[k]][fantomey[k]].setImage(imGhost3);
-                            break;
-                    }
-                }
-            }
+            tab[positionXPacMan][positionYPacMan].setImage(imPM);
 
-            for (int k = 0; k < spm.nbrfantome; k++) {
-                if ((fantomex[k] != oldfantomex[k] || fantomey[k] != oldfantomey[k])) {
+            jeu.getGrille().setElement(oldx, oldy, 0);
+            if (oldx != positionXPacMan || oldy != positionYPacMan)
+                tab[oldx][oldy].setImage(imSol);
+
+            oldx = positionXPacMan;
+            oldy = positionYPacMan;
+
+
+            //on remplace l'endroit où ils étaient avant
+            for (int k = 0; k < jeu.getTabFantome().size(); k++) {
+                if ((fantomes.get(k).getX() != oldfantomex[k] || fantomes.get(k).getY() != oldfantomey[k])) {
                     //on les enleve de leur ancienne posisition
-                    switch (spm.getTab(oldfantomex[k], oldfantomey[k])) {
+                    switch (jeu.getGrille().getElement(oldfantomex[k], oldfantomey[k])) {
                         case 0:
                             tab[oldfantomex[k]][oldfantomey[k]].setImage(imSol);
                             break;
@@ -142,61 +176,53 @@ public class SimpleVC extends Application {
                             break;
                     }
                 }
-                oldfantomex[k] = spm.getFantomex(k);
-                oldfantomey[k] = spm.getFantomey(k);
+            }
+            //on dessine les fantomes
+            for (int k = 0; k < jeu.getTabFantome().size(); k++) {
+                int x = fantomes.get(k).getX();
+                int y = fantomes.get(k).getY();
+                if (jeu.estInvincible()) {
+                    tab[x][y].setImage(imGhostAfraid);
+                } else {
+                    tab[x][y].setImage(fantomes.get(k).getImage());
+                }
+                //on memorise leur nouvelle position
+                oldfantomex[k] = x;
+                oldfantomey[k] = y;
             }
 
-            if (oldx != spm.getX() || oldy != spm.getY())
-                tab[oldx][oldy].setImage(imSol);
 
-            if (spm.getTab(spm.getX(), spm.getY()) == 2) {
-                spm.augmenterScore(0);
-                spm.setTab(spm.getX(), spm.getY(), 0);
-            } else if (spm.getTab(spm.getX(), spm.getY()) == 3) {
-                spm.augmenterScore(1);
-                spm.setInvincible();
-                spm.setTab(spm.getX(), spm.getY(), 0);
-            }
-
-            oldx = spm.getX();
-            oldy = spm.getY();
-
-            spm.deplacementfantome();
-            spm.deplacement();
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    labelScore.textProperty().bind(Bindings.format("Score :  " + jeu.getScore()));
+                    if(jeu.estInvincible())
+                        labelInfo.textProperty().bind(Bindings.format("Invicible !"));
+                    else
+                        labelInfo.textProperty().bind(Bindings.format("Non Invicible"));
+                }
+            });
         };
 
-        spm.addObserver(o);
-        spm.start(); // on démarre spm 
 
-        VBox root = new VBox();
-        root.getChildren().
-
-                addAll(score, grid);
-
-        Scene scene = new Scene(root, 21 * 18, 21 * 19 + 25);
-
-        primaryStage.setTitle("PacMan");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        jeu.addObserver(o);
+        jeu.start(); // on démarre jeu
 
         // on écoute le clavier
-        grid.setOnKeyPressed(event ->
-
-        {
+        grid.setOnKeyPressed(event -> {
             if (event.getCode().isArrowKey()) {
-                spm.setDirectionPacMan(event.getCode());
+                jeu.getPacMan().setDirection(Direction.valueFor(event.getCode()));
             }
         });
 
         grid.requestFocus();
-        primaryStage.setOnCloseRequest((
-                WindowEvent event1) ->
-
-        {
-            spm.stop();
+        primaryStage.setOnCloseRequest((WindowEvent event1) -> {
+            mp.stop();
+            jeu.stop();
         });
 
     }
+
 
     /**
      * @param args the command line arguments
