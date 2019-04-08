@@ -11,10 +11,13 @@ import java.util.Observer;
 
 import javafx.scene.image.Image;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -24,6 +27,7 @@ public class SimpleVC extends Application {
     private final int SIZE_Y = 21;
     private int oldx = 0;
     private int oldy = 0;
+
     private int[] oldfantomex = new int[]{0, 0, 0, 0};
     private int[] oldfantomey = new int[]{0, 0, 0, 0};
 
@@ -33,9 +37,16 @@ public class SimpleVC extends Application {
 
         SimplePacMan spm = new SimplePacMan(SIZE_X, SIZE_Y); // initialisation du modèle
 
-        GridPane root = new GridPane(); // création de la grille
+        GridPane grid = new GridPane(); // création de la grille
+        GridPane score = new GridPane(); // création de la grille
 
-        // Pacman.svg.png
+        Label labelScore = new Label("Score : ");
+        labelScore.setStyle("-fx-text-fill: white");
+        score.setPadding(new Insets(5, 10, 5, 10));
+        score.setVgap(15);
+        score.setStyle("-fx-background-color: #000");
+        score.add(labelScore, 0, 0);
+        // Pacman.svg.png 
         Image imPM = new Image("Pacman.png"); // préparation des images
         Image imSol = new Image("sol.png");
         Image imMur = new Image("mur.png");
@@ -56,7 +67,7 @@ public class SimpleVC extends Application {
             for (int j = 0; j < SIZE_Y; j++) {
                 ImageView img = new ImageView();
                 tab[i][j] = img;
-                root.add(img, i, j);
+                grid.add(img, i, j);
 
                 switch (spm.getTab(i, j)) {
                     case 0:
@@ -86,63 +97,53 @@ public class SimpleVC extends Application {
                 spm.decrementerTimer();
             }
 
+            // on dessine pacman
+            tab[spm.getX()][spm.getY()].setImage(imPM);
             spm.collisionFantome();
-            for (int i = 0; i < SIZE_X; i++) { // rafraichissement graphique  => on passe sur chaque case
-                for (int j = 0; j < SIZE_Y; j++) {
 
-                    // pacman est à la position i, j => le dessiner
-                    if (spm.getX() == i && spm.getY() == j) {
-                        tab[i][j].setImage(imPM);
-                    }
-                    //on s'occupe des fantomes
-                    for (int k = 0; k < spm.nbrfantome; k++) {
-                        if (fantomex[k] == i && fantomey[k] == j) {
-                            //on les redesinnes où ils doivent etre
-                            if (spm.estInvincible()) {
-                                tab[i][j].setImage(imGhostAfraid);
-                            } else {
-                                switch (k) {
-                                    case 0:
-                                        tab[i][j].setImage(imGhost0);
-                                        break;
-                                    case 1:
-                                        tab[i][j].setImage(imGhost1);
-                                        break;
-                                    case 2:
-                                        tab[i][j].setImage(imGhost2);
-                                        break;
-                                    case 3:
-                                        tab[i][j].setImage(imGhost3);
-                                        break;
-                                }
-                            }
-
-                        }
-                    }
-
-                    for (int k = 0; k < spm.nbrfantome; k++) {
-                        if ((fantomex[k] != oldfantomex[k] || fantomey[k] != oldfantomey[k])) {
-                            //on les enleve de leur ancienne posisition
-                            switch (spm.getTab(oldfantomex[k], oldfantomey[k])) {
-                                case 0:
-                                    tab[oldfantomex[k]][oldfantomey[k]].setImage(imSol);
-                                    break;
-                                case 2:
-                                    tab[oldfantomex[k]][oldfantomey[k]].setImage(imPetiteGomme);
-                                    break;
-                                case 3:
-                                    tab[oldfantomex[k]][oldfantomey[k]].setImage(imGomme);
-                                    break;
-                                case 4:
-                                    tab[oldfantomex[k]][oldfantomey[k]].setImage(null);
-                                    break;
-                            }
-                        }
-
-                        oldfantomex[k] = spm.getFantomex(k);
-                        oldfantomey[k] = spm.getFantomey(k);
+            //on s'occupe des fantomes
+            for (int k = 0; k < spm.nbrfantome; k++) {
+                //on les redesinnes où ils doivent etre
+                if (spm.estInvincible()) {
+                    tab[fantomex[k]][fantomey[k]].setImage(imGhostAfraid);
+                } else {
+                    switch (k) {
+                        case 0:
+                            tab[fantomex[k]][fantomey[k]].setImage(imGhost0);
+                            break;
+                        case 1:
+                            tab[fantomex[k]][fantomey[k]].setImage(imGhost1);
+                            break;
+                        case 2:
+                            tab[fantomex[k]][fantomey[k]].setImage(imGhost2);
+                            break;
+                        case 3:
+                            tab[fantomex[k]][fantomey[k]].setImage(imGhost3);
+                            break;
                     }
                 }
+            }
+
+            for (int k = 0; k < spm.nbrfantome; k++) {
+                if ((fantomex[k] != oldfantomex[k] || fantomey[k] != oldfantomey[k])) {
+                    //on les enleve de leur ancienne posisition
+                    switch (spm.getTab(oldfantomex[k], oldfantomey[k])) {
+                        case 0:
+                            tab[oldfantomex[k]][oldfantomey[k]].setImage(imSol);
+                            break;
+                        case 2:
+                            tab[oldfantomex[k]][oldfantomey[k]].setImage(imPetiteGomme);
+                            break;
+                        case 3:
+                            tab[oldfantomex[k]][oldfantomey[k]].setImage(imGomme);
+                            break;
+                        case 4:
+                            tab[oldfantomex[k]][oldfantomey[k]].setImage(null);
+                            break;
+                    }
+                }
+                oldfantomex[k] = spm.getFantomex(k);
+                oldfantomey[k] = spm.getFantomey(k);
             }
 
             if (oldx != spm.getX() || oldy != spm.getY())
@@ -167,21 +168,31 @@ public class SimpleVC extends Application {
         spm.addObserver(o);
         spm.start(); // on démarre spm 
 
-        Scene scene = new Scene(root, 21 * 18, 21 * 19);
+        VBox root = new VBox();
+        root.getChildren().
+
+                addAll(score, grid);
+
+        Scene scene = new Scene(root, 21 * 18, 21 * 19 + 25);
 
         primaryStage.setTitle("PacMan");
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        // on écoute le clavier 
-        root.setOnKeyPressed(event -> {
+        // on écoute le clavier
+        grid.setOnKeyPressed(event ->
+
+        {
             if (event.getCode().isArrowKey()) {
                 spm.setDirectionPacMan(event.getCode());
             }
         });
 
-        root.requestFocus();
-        primaryStage.setOnCloseRequest((WindowEvent event1) -> {
+        grid.requestFocus();
+        primaryStage.setOnCloseRequest((
+                WindowEvent event1) ->
+
+        {
             spm.stop();
         });
 

@@ -5,6 +5,7 @@
  */
 package Modele;
 
+import VueControleur.SimpleVC;
 import javafx.scene.input.KeyCode;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -14,6 +15,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Random;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 
 public class SimplePacMan extends Observable implements Runnable {
 
@@ -370,6 +373,7 @@ public class SimplePacMan extends Observable implements Runnable {
     public int[] getFantomesy() {
         return fantomey;
     }
+    
 
     public int getFantomex(int k) {
         return fantomex[k];

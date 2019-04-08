@@ -2,10 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TestPacMan/Modele/SimplePacMan$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TestPacMan/Modele/SimplePacMan$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TestPacMan/Modele/SimplePacMan.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TestPacMan/Modele/SimplePacMan.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TestPacMan/VueControleur/SimpleVC.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TestPacMan/VueControleur/SimpleVC.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/fantome_vulnerable.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/built-jar.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/built-jar.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Modele/SimplePacMan$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Modele/SimplePacMan$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Modele/SimplePacMan.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Modele/SimplePacMan.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/VueControleur/SimpleVC.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/VueControleur/SimpleVC.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/fantome_bleu.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/fantome_bleu.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/fantome_orange.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/fantome_orange.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/fantome_rouge.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/fantome_rouge.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/fantome_vert.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/fantome_vert.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/SimplePacMan.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/SimplePacMan.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/SimplePacMan.jar" beforeDir="false" afterPath="$PROJECT_DIR$/dist/SimplePacMan.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/SimplePacMan.jnlp" beforeDir="false" afterPath="$PROJECT_DIR$/dist/SimplePacMan.jnlp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modele/SimplePacMan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/SimplePacMan.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VueControleur/SimpleVC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VueControleur/SimpleVC.java" afterDir="false" />
     </list>
@@ -64,37 +72,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Modele/SimplePacMan.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
-              <caret line="105" column="39" selection-start-line="105" selection-start-column="39" selection-end-line="105" selection-end-column="39" />
+            <state relative-caret-position="468">
+              <caret line="108" column="39" selection-start-line="108" selection-start-column="39" selection-end-line="108" selection-end-column="39" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#10960#10961#0" expanded="true" />
-                <element signature="e#11896#11897#0" expanded="true" />
-                <element signature="e#11975#11976#0" expanded="true" />
-                <element signature="e#12037#12038#0" expanded="true" />
-                <element signature="e#12086#12087#0" expanded="true" />
-                <element signature="e#12135#12136#0" expanded="true" />
-                <element signature="e#12201#12202#0" expanded="true" />
-                <element signature="e#12267#12268#0" expanded="true" />
+                <element signature="e#12304#12305#0" expanded="true" />
                 <element signature="e#12338#12339#0" expanded="true" />
+                <element signature="e#12375#12376#0" expanded="true" />
                 <element signature="e#12409#12410#0" expanded="true" />
+                <element signature="e#12472#12473#0" expanded="true" />
                 <element signature="e#12526#12527#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/VueControleur/SimpleVC.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="94">
-              <caret line="88" column="35" selection-start-line="88" selection-start-column="35" selection-end-line="88" selection-end-column="35" />
+            <state relative-caret-position="-281">
+              <caret line="146" column="13" selection-start-line="146" selection-start-column="13" selection-end-line="146" selection-end-column="13" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#7132#7133#0" expanded="true" />
+                <element signature="e#6925#6926#0" expanded="true" />
+                <element signature="e#6953#6954#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -121,8 +123,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/VueControleur/SimpleVC.java" />
         <option value="$PROJECT_DIR$/src/Modele/SimplePacMan.java" />
+        <option value="$PROJECT_DIR$/src/VueControleur/SimpleVC.java" />
       </list>
     </option>
   </component>
@@ -292,6 +294,7 @@
       <workItem from="1554321195588" duration="7094000" />
       <workItem from="1554452401119" duration="3791000" />
       <workItem from="1554576940521" duration="2262000" />
+      <workItem from="1554711236816" duration="218000" />
     </task>
     <servers />
   </component>
@@ -309,13 +312,12 @@
       <window_info content_ui="combo" id="Project" order="4" sideWeight="0.6703755" visible="true" weight="0.015991472" />
       <window_info id="Structure" order="5" weight="0.25" />
       <window_info id="Favorites" order="6" />
-      <window_info anchor="bottom" id="Duplicate detector" weight="0.32936078" />
       <window_info anchor="bottom" id="Terminal" order="0" weight="0.32936078" />
       <window_info anchor="bottom" id="Docker" order="1" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="2" />
       <window_info anchor="bottom" id="Find" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="4" />
-      <window_info anchor="bottom" id="Run" order="5" weight="0.18309858" />
+      <window_info active="true" anchor="bottom" id="Run" order="5" visible="true" weight="0.18309858" />
       <window_info anchor="bottom" id="Debug" order="6" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
@@ -327,6 +329,7 @@
       <window_info anchor="bottom" id="Profiler" order="14" />
       <window_info anchor="bottom" id="Event Log" order="15" weight="0.32936078" />
       <window_info anchor="bottom" id="Messages" order="16" weight="0.100758396" />
+      <window_info anchor="bottom" id="Duplicate detector" order="17" weight="0.32936078" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
       <window_info anchor="right" id="Palette&#9;" order="1" />
       <window_info anchor="right" id="Theme Preview" order="2" />
