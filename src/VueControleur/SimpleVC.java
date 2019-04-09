@@ -38,11 +38,8 @@ public class SimpleVC extends Application {
     private int[] oldfantomex = new int[]{0, 0, 0, 0};
     private int[] oldfantomey = new int[]{0, 0, 0, 0};
 
-
     @Override
     public void start(Stage primaryStage) {
-
-
         // initialisation du jeu
         Jeu jeu = new Jeu();
         int SIZE_X = jeu.getGrille().getSizeX();
@@ -66,25 +63,16 @@ public class SimpleVC extends Application {
         labelScore.setStyle("-fx-text-fill: white");
         score.setPadding(new Insets(5, 10, 5, 10));
         score.setStyle("-fx-background-color: #000");
-        score.add(labelScore, 0, 0);
-        //affichage séparateur
-        Label labelSeparateur = new Label();
-        labelSeparateur.setStyle("-fx-text-fill: white");
-        labelSeparateur.setAlignment(Pos.CENTER);
-        score.add(labelSeparateur, 1, 0);
+        score.add(labelScore, 1, 0);
         //affichage invinsible/game over
         Label labelInfo = new Label();
         labelInfo.setStyle("-fx-text-fill: white");
         labelInfo.setContentDisplay(ContentDisplay.RIGHT);
-        score.add(labelInfo, 2, 0);
+        score.add(labelInfo, 3, 0);
         //contraintes des colonnes
-        ColumnConstraints col1 = new ColumnConstraints();
-        col1.setPercentWidth(25);
-        ColumnConstraints col2 = new ColumnConstraints();
-        col2.setPercentWidth(50);
-        ColumnConstraints col3 = new ColumnConstraints();
-        col3.setPercentWidth(25);
-        score.getColumnConstraints().addAll(col1, col2, col3);
+        ColumnConstraints col = new ColumnConstraints();
+        col.setPercentWidth(20);
+        score.getColumnConstraints().addAll(col, col,col,col,col);
 
         // préparation des images
         Image imSol = new Image("sol.png");
@@ -137,29 +125,24 @@ public class SimpleVC extends Application {
         Scene scene = new Scene(root, 21 * 18, 21 * 19 + 25);
         primaryStage.setTitle("PacMan");
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
+        primaryStage.sizeToScene();
         primaryStage.show();
+
 
         // l'observer observe l'obervable (update est exécuté dès notifyObservers() est appelé côté modèle )
         Observer o = (o1, arg) -> {
             ArrayList<Fantome> fantomes = jeu.getTabFantome();
-
-            // on dessine pacman
+            //on remplace l'endroit où ils étaient avant
+            //on remplace le sol où était pacman
             int positionXPacMan = jeu.getPacMan().getX();
             int positionYPacMan = jeu.getPacMan().getY();
-
-            tab[positionXPacMan][positionYPacMan].setImage(imPM);
-
             jeu.getGrille().setElement(oldx, oldy, 0);
             if (oldx != positionXPacMan || oldy != positionYPacMan)
                 tab[oldx][oldy].setImage(imSol);
 
-            oldx = positionXPacMan;
-            oldy = positionYPacMan;
-
-
-            //on remplace l'endroit où ils étaient avant
             for (int k = 0; k < jeu.getTabFantome().size(); k++) {
-                if ((fantomes.get(k).getX() != oldfantomex[k] || fantomes.get(k).getY() != oldfantomey[k])) {
+                if ((fantomes.get(k).getX() != oldfantomex[k] || fantomes.get(k).getY() != oldfantomey[k]) && jeu.caseSansFantome(oldfantomex[k],oldfantomey[k])) {
                     //on les enleve de leur ancienne posisition
                     switch (jeu.getGrille().getElement(oldfantomex[k], oldfantomey[k])) {
                         case 0:
@@ -191,15 +174,23 @@ public class SimpleVC extends Application {
                 oldfantomey[k] = y;
             }
 
+            // on dessine pacman
+            tab[positionXPacMan][positionYPacMan].setImage(imPM);
+
+            oldx = positionXPacMan;
+            oldy = positionYPacMan;
 
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
                     labelScore.textProperty().bind(Bindings.format("Score :  " + jeu.getScore()));
-                    if(jeu.estInvincible())
-                        labelInfo.textProperty().bind(Bindings.format("Invicible !"));
-                    else
-                        labelInfo.textProperty().bind(Bindings.format("Non Invicible"));
+                    if(jeu.estFini()) {
+                        if(jeu.estGameOver())
+                            labelInfo.textProperty().bind(Bindings.format("Game Over ! "));
+                        else
+                            labelInfo.textProperty().bind(Bindings.format("Bien joué !"));
+                    }
+
                 }
             });
         };

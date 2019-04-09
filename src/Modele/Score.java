@@ -20,15 +20,13 @@ public class Score {
             this.score += 50;
         }
         //1er fantôme
-        else if (point == 2)
-            this.score += 200;
-            //enchaine les fantomes
-        else
+        else if (point == 2){
+            this.scoreKillSreak=200;this.score += this.scoreKillSreak;
+        } //enchaine les fantomes
+        else{
             this.scoreKillSreak += this.scoreKillSreak * 2;
-    }
-
-    public void ajouterScoreKillStreak() {
-        this.score += this.scoreKillSreak;
+            this.score += this.scoreKillSreak;
+        };
     }
 
     public int getScore() {
