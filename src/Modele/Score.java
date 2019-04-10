@@ -3,11 +3,11 @@ package Modele;
 public class Score {
 
     private int score;
-    private int scoreKillSreak;
+    private int scoreKillStreak;
 
     public Score() {
         this.score = 0;
-        this.scoreKillSreak = 0;
+        this.scoreKillStreak = 0;
     }
 
     public void augmenterScore(int point) {
@@ -21,11 +21,11 @@ public class Score {
         }
         //1er fantôme
         else if (point == 2){
-            this.scoreKillSreak=200;this.score += this.scoreKillSreak;
+            this.scoreKillStreak =200;this.score += this.scoreKillStreak;
         } //enchaine les fantomes
         else{
-            this.scoreKillSreak += this.scoreKillSreak * 2;
-            this.score += this.scoreKillSreak;
+            this.scoreKillStreak += this.scoreKillStreak * 2;
+            this.score += this.scoreKillStreak;
         };
     }
 
@@ -34,6 +34,6 @@ public class Score {
     }
 
     public void setScoreF(int i) {
-        this.scoreKillSreak =0;
+        this.scoreKillStreak =0;
     }
 }
