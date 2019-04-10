@@ -1,6 +1,5 @@
 package Modele;
 
-import VueControleur.SimpleVC;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -118,7 +117,7 @@ public class Jeu extends Observable implements Runnable {
         return true;
     }
 
-    public void collisionFantome() {
+    private void collisionFantome() {
         for (int i = 0; i < this.tabFantome.size(); i++) {
             if (detectionCollision(i)) {
                 if (estInvincible()) {
@@ -137,7 +136,7 @@ public class Jeu extends Observable implements Runnable {
         }
     }
 
-    public void setInvincible() {
+    private void setInvincible() {
         this.estInvincible = true;
         this.estEnKillStreak = false;
         this.timerInvincible = 20;
@@ -148,7 +147,7 @@ public class Jeu extends Observable implements Runnable {
         return this.estInvincible;
     }
 
-    public void decrementerTimer() {
+    private void decrementerTimer() {
         this.timerInvincible--;
         if (this.timerInvincible == 0) {
             this.estInvincible = false;

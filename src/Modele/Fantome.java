@@ -50,21 +50,18 @@ public class Fantome extends Entite {
             switch (randomElement) {
                 case UP:
                     y--;
-                    currentDirection = Direction.UP;
                     break;
                 case DOWN:
                     y++;
-                    currentDirection = Direction.DOWN;
                     break;
                 case RIGHT:
                     x++;
-                    currentDirection = Direction.RIGHT;
                     break;
                 case LEFT:
                     x--;
-                    currentDirection = Direction.LEFT;
                     break;
             }
+            currentDirection = randomElement;
             listeDeplacement.clear();
         }
     }

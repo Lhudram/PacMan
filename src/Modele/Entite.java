@@ -1,7 +1,6 @@
 package Modele;
 
 public abstract class Entite {
-    protected Direction currentDirection;
 
     protected abstract void realiserAction();
 

@@ -8,13 +8,11 @@ package VueControleur;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Observer;
-
 import Modele.Direction;
 import Modele.Fantome;
 import Modele.Jeu;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
-import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.Image;
 import javafx.application.Application;
