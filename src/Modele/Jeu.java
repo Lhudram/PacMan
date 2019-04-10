@@ -59,7 +59,7 @@ public class Jeu extends Observable implements Runnable {
                 for (Fantome f : this.tabFantome)
                     f.realiserAction();
             try {
-                Thread.sleep(300); // pause
+                Thread.sleep(250); // pause
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
                 return;
